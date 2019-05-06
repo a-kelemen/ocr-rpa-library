@@ -3,7 +3,6 @@
 from __future__ import absolute_import, division, generators, print_function, unicode_literals
 import os
 from ..base import Base
-from robot.libraries.BuiltIn import BuiltIn, RobotNotRunningError
 import pytesseract
 from PIL import Image, ImageEnhance, ImageFilter
 from pdf2image import convert_from_path
@@ -11,25 +10,22 @@ from ..exception import *
 
 
 class OcrKeywords(Base):
-	#https://medium.freecodecamp.org/getting-started-with-tesseract-part-i-2a6a6b1cf75e
-	# TODO ez kell a dokumentacioba az installhoz
 
 	def ocr_image(self, image, save):
-		# TODO az rgba konverzio kulon keywordbe kell hogy legyen
 		image_source = self._get_source(image)
 		if not os.path.isfile(image_source):
 			raise FileNotFoundException("File not found: " + str(image_source))
 		im = Image.open(image_source)
 		im = im.convert("RGBA")
-		newimdata = []
-		datas = im.getdata()
+		new_im_data = []
+		img_data = im.getdata()
 
-		for item in datas:
+		for item in img_data:
 			if item[0] < 112 or item[1] < 112 or item[2] < 112:
-				newimdata.append(item)
+				new_im_data.append(item)
 			else:
-				newimdata.append((255, 255, 255))
-		im.putdata(newimdata)
+				new_im_data.append((255, 255, 255))
+		im.putdata(new_im_data)
 
 		im = im.filter(ImageFilter.MedianFilter())
 		enhancer = ImageEnhance.Contrast(im)
@@ -41,7 +37,6 @@ class OcrKeywords(Base):
 		# hungarian - hun
 		# english - eng
 		text = pytesseract.image_to_string(Image.open(temp_image), config='-c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyz -psm 6', lang='eng')
-		#print(text)
 		if not save:
 			os.remove(temp_image)
 		return "".join(text.splitlines())
@@ -55,13 +50,8 @@ class OcrKeywords(Base):
 		if bw_image == "":
 			image_file.save(image_source)
 		else:
-			try:
-				new_source = self._get_source(bw_image)
-				image_file.save(new_source)
-			except Exception as e:
-				#TODO exception.- lehet hogy nem is kell
-				pass
-
+			new_source = self._get_source(bw_image)
+			image_file.save(new_source)
 
 	def convert_pdf_to_image(self, pdf, output_folder):
 		pdf_file = self._get_source(pdf)
@@ -92,6 +82,3 @@ class OcrKeywords(Base):
 			if not save:
 				os.remove(img)
 		return "".join(out_text.splitlines())
-
-
-

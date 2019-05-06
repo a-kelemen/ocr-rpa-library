@@ -6,10 +6,7 @@ from __future__ import absolute_import, division, generators, print_function, un
 from .ocrmodule.keywords.definition.ocr import OcrKeywords
 
 
-
 def keyword(name=None):
-	#TODO ebbe az kell, hogy lefuttassa a keywordot, es ha sikres, akkor kiir valamit hogy sikeres hogy legyen
-	#valami haszna
 	if callable(name):
 		return keyword()(name)
 
@@ -90,6 +87,3 @@ class OcrProcessLibrary(object):
 		Fails if the given file isn't a pdf.
 		"""
 		return self.ocr.ocr_pdf(pdf_source, save)
-
-
-

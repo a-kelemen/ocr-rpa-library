@@ -11,6 +11,7 @@ setuptools.setup(name='ocrprocesslibrary',
 
       install_requires=[
         'robotframework',
+        'Pillow',
         'pytesseract',
         'pdf2image'
       ],

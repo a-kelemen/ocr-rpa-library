@@ -10,9 +10,5 @@ class FileNotFoundException(OcrLibraryException):
 	pass
 
 
-class DirectoryNotFoundException(OcrLibraryException):
-	pass
-
-
 class FileFormatException(OcrLibraryException):
 	pass

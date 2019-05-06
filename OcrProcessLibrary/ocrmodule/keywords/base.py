@@ -8,19 +8,11 @@ from robot.libraries.BuiltIn import BuiltIn, RobotNotRunningError
 class Base(object):
 
 	def _get_process_folder(self):
-		#print("-----------------------")
-		#print(os.path.dirname(os.path.abspath(__file__)))
-		import sys
 		try:
 			process_dir = os.path.dirname(BuiltIn().get_variable_value("${SUITE SOURCE}"))
 			return process_dir
 		except RobotNotRunningError as e:
-			#print(type(e).__name__)
-			#print("-----------------------")
-			#print(os.path.dirname(os.path.abspath(__file__)))
 			base_dir = self._nth_parent_folder(__file__, 3)
-			#test directory of the module
-			#print(os.path.join(base_dir, str("test")))
 			return os.path.join(base_dir, str("tests"))
 
 	def _get_source(self, file_name):
