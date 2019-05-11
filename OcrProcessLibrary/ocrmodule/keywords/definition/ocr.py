@@ -39,7 +39,7 @@ class OcrKeywords(Base):
 		text = pytesseract.image_to_string(Image.open(temp_image), config='-c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyz -psm 6', lang='eng')
 		if not save:
 			os.remove(temp_image)
-		return "".join(text.splitlines())
+		return " ".join(text.splitlines())
 
 	def image_to_black_and_white(self, image, bw_image):
 		image_source = self._get_source(image)
