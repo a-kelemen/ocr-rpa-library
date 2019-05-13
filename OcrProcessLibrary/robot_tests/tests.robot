@@ -13,9 +13,6 @@ Ocr Image Png
     ${in}=                   Evaluate  "OcrProcessLibrary" in "${text}"
     Should Be True           ${in}
 
-#Image To Black And White
-
-#Convert Pdf To Image
 Ocr Pdf
     [Tags]                   Ocr Pdf
     ${text}=                 Ocr Pdf  test_files/pdf_test.pdf

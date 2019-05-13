@@ -16,36 +16,27 @@ class TestDataKeywords(unittest.TestCase):
 	def test_ocr_image_png_lowercase(self):
 		"""Ocr Image"""
 		img_text = self.ocrLib.ocr_image("test_files/png_test.png")
-		#print(img_text)
 		self.assertIn("ocrprocesslibrary", img_text.lower())
 
 	def test_ocr_image_png_uppercase(self):
 		"""Ocr Image"""
 		img_text = self.ocrLib.ocr_image("test_files/png_test.png")
-		#print(img_text)
 		self.assertIn("OcrProcessLibrary", img_text)
 
 	def test_ocr_image_jpg_lowercase(self):
 		"""Ocr Image"""
 		img_text = self.ocrLib.ocr_image("test_files/jpg_test.jpg")
-		#print(img_text)
 		self.assertIn("ocrprocesslibrary", img_text.lower())
 
 	def test_ocr_image_jpg_uppercase(self):
 		"""Ocr Image"""
 		img_text = self.ocrLib.ocr_image("test_files/jpg_test.jpg")
-		#print(img_text)
 		self.assertIn("OcrProcessLibrary", img_text)
 
 	def test_ocr_image_color(self):
 		"""Ocr Image"""
 		img_text = self.ocrLib.ocr_image("test_files/color_test.png")
-		#print(img_text)
 		self.assertIn("Digital Channel", img_text)
-	#def test_ocr_image_pdf(self):
-	#	"""  """
-	#	img_text = self.ocrLib.ocr_image("test_files/test_doc.pdf")
-	#	self.assertIn("Digital Channel", img_text)
 
 	def test_image_to_bw(self):
 		"""Image To Black And White"""
@@ -53,7 +44,6 @@ class TestDataKeywords(unittest.TestCase):
 		test_dir = os.path.dirname(__file__)
 		is_file = os.path.isfile(os.path.join(test_dir, 'test_files', 'test_img_bw.png'))
 		self.assertTrue(is_file)
-	#TODO tobb teszt - jpgvtel, ures 2. parameterrel, 2. param absz, nem letezik, eception stb
 
 	def test_pdf_to_jpg_1(self):
 		"""Convert Pdf To Image"""
